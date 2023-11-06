@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 13:55:09 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/11/05 19:03:49 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/11/06 16:11:00 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,22 @@ void	Phonebook::setDarkSecret(int index, std::string contactDarkSecret){
 	this->contactList[index].setDarkSecret(contactDarkSecret);
 }
 
-std::string	 Phonebook::getContactFirstName(){
-	
+std::string	 Phonebook::getContactFirstName(int index){
+	return(this->contactList[index].getFirstName());
+}
+
+std::string	 Phonebook::getContactLastName(int index){
+	return(this->contactList[index].getLastName());
+}
+
+std::string	 Phonebook::getContactNickName(int index){
+	return(this->contactList[index].getNickName());
+}
+
+std::string	 Phonebook::getContactPhoneNum(int index){
+	return(this->contactList[index].getPhoneNum());
+}
+
+std::string	 Phonebook::getContactDarkSecret(int index){
+	return(this->contactList[index].getDarkSecret());
 }
