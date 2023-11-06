@@ -6,13 +6,13 @@
 #    By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/01 18:39:18 by jebucoy           #+#    #+#              #
-#    Updated: 2023/11/02 13:51:04 by jebucoy          ###   ########.fr        #
+#    Updated: 2023/11/05 19:33:49 by jebucoy          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	megaphone
 
-SRCS = megaphone.cpp \
+SRCS = Megaphone.cpp \
 
 OBJS = $(SRCS:.cpp=.o)
 

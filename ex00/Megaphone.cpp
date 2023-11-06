@@ -1,17 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   megaphone.cpp                                      :+:      :+:    :+:   */
+/*   Megaphone.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 18:26:34 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/11/03 17:30:36 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/11/05 19:38:00 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <cctype>
+#include <cstring>
 
 int main(int ac, char **av)
 {
@@ -31,4 +32,5 @@ int main(int ac, char **av)
 		if (s + 1 != ac)
 			std::cout << " ";
 	}
+	std::cout << std::endl;
 }
