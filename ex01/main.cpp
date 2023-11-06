@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 16:26:34 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/11/06 19:12:43 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/11/06 20:35:35 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 int main(){
 	// bool		run;
+	Phonebook	pb;
 	std::string	option;
 
 	// run = true;
@@ -28,6 +29,7 @@ int main(){
 		std::cout << "[EXIT] : exit the program" << std::endl;
 		std::cout << "Enter an option: ";
 		std::getline(std::cin, option);
-		std::cout << option << std::endl;
+		if (option == "add")
+			pb.addContact()
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 17:22:26 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/11/06 16:40:56 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/11/06 20:39:23 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,26 +19,12 @@
 class Phonebook{
 	private:
 		Contact contactList[8];
+		int		count;
 	public:
-		void	setContactFirstName(int index, std::string contactFirstName);
-		void	setContactLastName(int index, std::string contactLastName);
-		void	setContactNickName(int index, std::string contactNickName);
-		void	setContactPhoneNum(int index, std::string contactPhoneNum);
-		void	setDarkSecret(int index, std::string contactDarkSecret);
-		std::string	 getContactFirstName(int index);
-		std::string	 getContactLastName(int index);
-		std::string	 getContactNickName(int index);
-		std::string	 getContactPhoneNum(int index);
-		std::string	 getContactDarkSecret(int index);
 		void	addContact();
 		void	searchContact();
 		void	exitProgram();
 };
-
-// void	Phonebook::addContact(){
-	
-// }
-
 
 #endif
 
