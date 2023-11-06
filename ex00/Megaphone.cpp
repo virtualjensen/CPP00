@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 18:26:34 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/11/05 19:38:00 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/11/06 15:52:09 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 int main(int ac, char **av)
 {
 	char	convert;
+	size_t	len;
 
 	if (ac == 1)
 	{
@@ -24,7 +25,8 @@ int main(int ac, char **av)
 		return (0);
 	}
 	for(int s = 1; s < ac; s++){ 
-		for(size_t i = 0; i < strlen(av[s]); i++){
+		len = strlen(av[s]);
+		for(size_t i = 0; i < len; i++){
 			convert = toupper(av[s][i]);
 
 			std::cout << convert;
