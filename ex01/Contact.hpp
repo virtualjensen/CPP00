@@ -6,13 +6,14 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 17:27:18 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/11/06 16:13:35 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/11/06 17:27:04 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CONTACT_HPP
 #define CONTACT_HPP
 #include <iostream>
+#include <cstring>
 
 class Contact{
 	private:
