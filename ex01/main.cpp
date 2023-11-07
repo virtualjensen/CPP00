@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 16:26:34 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/11/07 17:56:46 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/11/07 20:09:58 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int main(){
 	// run = true;
 	// option = NULL;
 	while(1){
+		if (option != "ADD" && option != "SEARCH" && option != "EXIT")
 		std::cout << "-----PHONEBOOK-----" << std::endl;
 		std::cout << "       MENU:      " << std::endl;
 		std::cout << "[ADD] : add a contact" << std::endl;
@@ -31,9 +32,11 @@ int main(){
 		std::getline(std::cin, option);
 		// if (option.empty())
 		// 	return (1);
-		if (option == "add")
+		if (option == "ADD")
 			pb.addContact();
-		if (option == "exit"){
+		if (option == "SEARCH")
+			pb.searchContact();
+		if (option == "EXIT"){
 			std::cout << "Exiting Phonebook\n";
 			return (0);
 		}
