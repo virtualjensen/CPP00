@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 13:55:09 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/11/07 19:34:18 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/11/08 15:14:52 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 Phonebook::Phonebook()
 {
 	count = 0;
+}
+
+void	displayContactHeader(){
+	std::cout << "----------------------------------"
 }
 
 void	Phonebook::searchContact(){
