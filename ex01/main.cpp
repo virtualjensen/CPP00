@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 16:26:34 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/11/08 15:12:00 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/11/08 16:11:40 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int main(){
 			option = "ADD";
 		}
 		else{
-			std::cout << "-----PHONEBOOK-----" << std::endl;
+			std::cout << "\n-----PHONEBOOK-----" << std::endl;
 			std::cout << "       MENU:      " << std::endl;
 			std::cout << "[ADD] : add a contact" << std::endl;
 			std::cout << "[SEARCH] : search for a contact" << std::endl;
