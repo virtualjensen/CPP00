@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 13:55:09 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/11/08 16:33:02 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/11/09 20:20:47 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,40 @@ void	Phonebook::displayContactHeader(){
 	std::cout << "---------------------------------------------" << std::endl;
 }
 
-void	Phonebook::searchContact(){
+void	Phonebook::displayContactList(){
 	displayContactHeader();
-	for (int i = 0; i < this->count; i++){
+	for (int i = 0; i < 8; i++){
 		std::cout << "|";
 		std::cout << std::setw(10) << i + 1 << "|";
+		
 		std::cout << std::setw(10) << this->contactList[i].getFirstName().substr(0, 10) << "|";
 		std::cout << std::setw(10) << this->contactList[i].getLastName().substr(0, 10) << "|";
 		std::cout << std::setw(10) << this->contactList[i].getNickName().substr(0, 10) << "|";
 		std::cout << std::endl;
 	}
-	
+	searchContact();
+}
+
+void	Phonebook::searchContact(){
+	std::stringstream ss;
+
+	std::string	contactIdx;
+	std::cout << "Who are you looking for? (enter index): ";
+	std::getline(std::cin, contactIdx);
+	ss << contactIdx;
+	int	intIdx;
+	ss >> intIdx;
+	if (intIdx < 1 || intIdx > 8){
+		std::cerr << "Out of range, try again" << std::endl;
+		return ;
+	}
+	std::cout << "\033c";
+	std::cout << "Index: " << intIdx << std::endl;
+	std::cout << "First Name:" << this->contactList[intIdx - 1].getFirstName() << std::endl;
+	std::cout << "Last Name: " << this->contactList[intIdx - 1].getLastName() << std::endl;
+	std::cout << "Nickname: " << this->contactList[intIdx - 1].getNickName() << std::endl;
+	std::cout << "Phone #: " << this->contactList[intIdx - 1].getPhoneNum() << std::endl;
+	std::cout << "Secret: " << this->contactList[intIdx - 1].getDarkSecret() << std::endl;
 }
 
 void	Phonebook::addContact(){
@@ -55,7 +78,6 @@ void	Phonebook::addContact(){
 		std::cerr << "Can't have empty field. Try again.\n";
 		return ;
 	}
-	contactList[count].setFirstName(firstName);
 	
 	std::cout << "Last Name: ";
 	std::getline(std::cin, lastName);
@@ -64,7 +86,6 @@ void	Phonebook::addContact(){
 		std::cerr << "Can't have empty field. Try again.\n";
 		return ;
 	}
-	contactList[count].setLastName(lastName);
 
 	std::cout << "Nickname: ";
 	std::getline(std::cin, nickName);
@@ -73,7 +94,6 @@ void	Phonebook::addContact(){
 		std::cerr << "Can't have empty field. Try again.\n";
 		return ;
 	}
-	contactList[count].setNickName(nickName);	
 	
 	std::cout << "Phone Number: ";
 	std::getline(std::cin, phoneNum);
@@ -82,7 +102,6 @@ void	Phonebook::addContact(){
 		std::cerr << "Can't have empty field. Try again.\n";
 		return ;
 	}
-	contactList[count].setPhoneNum(phoneNum);	
 	
 	std::cout << "Darkest Secret: ";
 	std::getline(std::cin, darkSecret);
@@ -91,8 +110,10 @@ void	Phonebook::addContact(){
 		std::cerr << "Can't have empty field. Try again.\n";
 		return ;
 	}
-	contactList[count].setDarkSecret(darkSecret);
+	this->contactList[count % 8].setFirstName(firstName);
+	this->contactList[count % 8].setLastName(lastName);
+	this->contactList[count % 8].setNickName(nickName);	
+	this->contactList[count % 8].setPhoneNum(phoneNum);
+	this->contactList[count % 8].setDarkSecret(darkSecret);
 	count++;
-	if (count > 7)
-		count = 0;
 }

@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 17:22:26 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/11/08 15:52:35 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/11/09 19:16:38 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define PHONEBOOK_HPP
 #include "Contact.hpp"
 
+#include <string>
 #include <iostream>
 #include <sstream>
 #include <iomanip>
@@ -25,9 +26,10 @@ class Phonebook{
 	public:
 		Phonebook();	
 		void	addContact();
-		void	searchContact();
+		void	displayContactList();
 		void	exitProgram();
 		void	displayContactHeader();
+		void	searchContact();
 };
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 16:26:34 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/11/08 16:11:40 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/11/09 18:09:30 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int main(){
 			if (option == "ADD")
 				pb.addContact();
 			if (option == "SEARCH")
-				pb.searchContact();
+				pb.displayContactList();
 			if (option == "EXIT"){
 				std::cout << "Exiting Phonebook\n";
 				return (0);
