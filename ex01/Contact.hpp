@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 17:27:18 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/11/09 20:20:39 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/11/10 14:48:26 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ class Contact{
 		std::string	phoneNum;
 		std::string	darkSecret;
 	public:
-		void truncateString(std::string input);
 		void setFirstName(std::string firstName);
 		void setLastName(std::string lastName);
 		void setNickName(std::string nickName);
