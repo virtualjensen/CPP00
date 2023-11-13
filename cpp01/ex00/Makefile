@@ -6,19 +6,22 @@
 #    By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/10 18:54:54 by jebucoy           #+#    #+#              #
-#    Updated: 2023/11/10 19:36:27 by jebucoy          ###   ########.fr        #
+#    Updated: 2023/11/13 21:04:29 by jebucoy          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME =
+NAME = Zombie
 
 CXX	= c++
 
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRCS = 
+SRCS =	main.cpp \
+		Zombie.cpp \
+		newZombie.cpp \
+		randomChump.cpp \
 
-OBJS = $(SRCS:.c=.o)
+OBJS = $(SRCS:.cpp=.o)
 
 $(NAME) : $(OBJS)
 		$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)

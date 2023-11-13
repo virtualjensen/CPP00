@@ -5,11 +5,16 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/10 19:47:20 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/11/10 19:47:53 by jebucoy          ###   ########.fr       */
+/*   Created: 2023/11/13 21:03:13 by jebucoy           #+#    #+#             */
+/*   Updated: 2023/11/13 21:03:17 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
 
-Zombie::Zombie *newZombie(std::string name)
+Zombie *newZombie(std::string name){
+	Zombie	*newZ;
+	
+	newZ = new Zombie(name);
+	return (newZ);
+}
