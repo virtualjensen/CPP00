@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Zombie.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/13 21:04:04 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/11/13 21:16:53 by jebucoy          ###   ########.fr       */
+/*   Created: 2023/11/13 21:24:48 by jebucoy           #+#    #+#             */
+/*   Updated: 2023/11/13 21:24:51 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
 
-int main(){
-	Zombie z("stack");
-	Zombie	*one = newZombie("mehrin");
-	one->announce();
-	Zombie	*two = newZombie("jensen");
-	two->announce();
-	Zombie	*three = newZombie("blurg");
-	three->announce();
-	randomChump("bobby");
-	randomChump("chad");
-	delete one;
-	delete two;
-	delete three;
+Zombie::Zombie(std::string name){
+	std::cout << "Created Zombie: " << name << std::endl;
+	this->name = name;
+}
+
+Zombie::~Zombie(){
+	std::cout << "Deleted Zombie: " << this->name << std::endl;
+}
+
+void	Zombie::announce(void){
+	std::cout << this->name << ": BraiiiiiiinnnzzzZ..." << std::endl;
 }

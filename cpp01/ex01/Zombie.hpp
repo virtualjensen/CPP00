@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Zombie.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/13 21:04:04 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/11/13 21:16:53 by jebucoy          ###   ########.fr       */
+/*   Created: 2023/11/13 21:24:29 by jebucoy           #+#    #+#             */
+/*   Updated: 2023/11/13 21:24:31 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#ifndef ZOMBIE_HPP
+#define ZOMBIE_HPP
+#include <iostream>
 
-int main(){
-	Zombie z("stack");
-	Zombie	*one = newZombie("mehrin");
-	one->announce();
-	Zombie	*two = newZombie("jensen");
-	two->announce();
-	Zombie	*three = newZombie("blurg");
-	three->announce();
-	randomChump("bobby");
-	randomChump("chad");
-	delete one;
-	delete two;
-	delete three;
-}
+class Zombie{
+	private:
+		std::string name;
+	public:
+		Zombie(std::string name);
+		~Zombie();
+		
+		void	announce(void);
+};
+
+Zombie* newZombie(std::string name);
+void randomChump(std::string name);
+
+#endif
