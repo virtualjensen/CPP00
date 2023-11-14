@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 21:24:29 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/11/13 21:24:31 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/11/15 03:28:03 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,11 @@ class Zombie{
 	private:
 		std::string name;
 	public:
-		Zombie(std::string name);
+		Zombie();
 		~Zombie();
 		
 		void	announce(void);
+		void	zombieName(std::string name);
 };
 
 Zombie* newZombie(std::string name);

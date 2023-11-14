@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 21:24:48 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/11/13 21:24:51 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/11/15 03:06:22 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,8 @@ Zombie::~Zombie(){
 
 void	Zombie::announce(void){
 	std::cout << this->name << ": BraiiiiiiinnnzzzZ..." << std::endl;
+}
+
+void	Zombie::zombieName(std::string name){
+	this->name = name;
 }
