@@ -6,7 +6,7 @@
 #    By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/13 21:18:52 by jebucoy           #+#    #+#              #
-#    Updated: 2023/11/13 21:24:14 by jebucoy          ###   ########.fr        #
+#    Updated: 2023/11/15 18:40:48 by jebucoy          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,9 +16,11 @@ CXX = c++
 
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRCS = 
+SRCS =	main.cpp \
+		Zombie.cpp \
+		zombieHorde.cpp \
 
-OBJS = $(SRCS:.cpp=o)
+OBJS = $(SRCS:.cpp=.o)
 
 $(NAME) : $(OBJS)
 		$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)

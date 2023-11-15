@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 21:24:29 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/11/15 03:28:03 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/11/15 18:39:56 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ class Zombie{
 		void	zombieName(std::string name);
 };
 
-Zombie* newZombie(std::string name);
-void randomChump(std::string name);
+Zombie*	zombieHorde(int N, std::string name);
+Zombie*	newZombie(std::string name);
+void	randomChump(std::string name);
 
 #endif
