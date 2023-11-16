@@ -6,16 +6,16 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 21:24:48 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/11/15 18:44:54 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/11/16 15:31:38 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
 
-Zombie::Zombie(){
-	std::cout << "Created Zombie" << std::endl;
-	// this->name = name;
+Zombie::Zombie(void){
+	std::cout << "Created a Zombie" << std::endl;
 }
+
 
 Zombie::~Zombie(){
 	std::cout << "Deleted Zombie" << std::endl;

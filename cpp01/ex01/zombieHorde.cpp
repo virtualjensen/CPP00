@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 21:24:54 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/11/15 03:28:42 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/11/16 15:33:24 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ Zombie*    zombieHorde(int N, std::string name){
 
 	Zombie	*horde = new Zombie[N];
 	for(int	i = 0; i < N; i++){
-		horde[N].zombieName(name);
+		horde[i].zombieName(name);
 	}
 	return (horde);
 }
