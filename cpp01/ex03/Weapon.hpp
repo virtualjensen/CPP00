@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 02:51:09 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/11/18 02:57:23 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/11/20 03:22:41 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ class Weapon{
     public:
         Weapon(std::string type);
         
-        std::string     getType();
+        const std::string     getType();
         void            setType(std::string type);
     
 };
