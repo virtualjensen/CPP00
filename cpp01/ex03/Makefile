@@ -6,11 +6,11 @@
 #    By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/18 02:47:09 by jebucoy           #+#    #+#              #
-#    Updated: 2023/11/18 07:10:56 by jebucoy          ###   ########.fr        #
+#    Updated: 2023/11/19 16:00:34 by jebucoy          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = Unnecessaryviolence
+NAME = unnecessaryViolence
 
 SRCS	=	main.cpp \
 			Weapon.cpp \

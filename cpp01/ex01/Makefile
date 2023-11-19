@@ -6,11 +6,11 @@
 #    By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/13 21:18:52 by jebucoy           #+#    #+#              #
-#    Updated: 2023/11/16 15:40:52 by jebucoy          ###   ########.fr        #
+#    Updated: 2023/11/19 16:00:46 by jebucoy          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = ZombieHorde
+NAME = zombieHorde
 
 CXX = c++
 
