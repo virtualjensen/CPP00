@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Weapon.cpp                                         :+:      :+:    :+:   */
+/*   Fixed.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/18 02:55:38 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/11/20 03:22:53 by jebucoy          ###   ########.fr       */
+/*   Created: 2023/11/20 18:08:39 by jebucoy           #+#    #+#             */
+/*   Updated: 2023/11/23 15:32:35 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Weapon.hpp"
+#ifndef FIXED_HPP
+#define FIXED_HPP
+#include <iostream>
 
-const std::string Weapon::getType(){
-    return (this->type);
-}
+class   Fixed{
+    private:
+        int fixedPointVal;
+        static const int bits = 8;
+    public:
+        Fixed();
+        Fixed(const Fixed &f);
+        ~Fixed();
+        Fixed &operator=(const Fixed &Fixed);
 
-void    Weapon::setType(std::string type){
-    this->type = type;
-}
+        int getRawBits( void) const;
+        void setRawBits(int const raw);
+};
 
-Weapon::Weapon(std::string type){
-    this->setType(type);
-}
+#endif

@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 19:00:10 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/11/19 18:18:41 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/11/20 03:17:42 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,13 @@ int main(int ac, char **av){
         return (1);
     }
     while(std::getline(inFile, contents)){
-        pos = contents.find(s1);
-        if (pos != std::string::npos){
-            contents.erase(pos, s1.length());
-            contents.insert(pos, s2);
-        }
+        do{
+            pos = contents.find(s1);
+            if (pos != std::string::npos){
+                contents.erase(pos, s1.length());
+                contents.insert(pos, s2);
+            }
+        } while (pos != std::string::npos);
         outFile << contents << std::endl;
     }
     inFile.close();
