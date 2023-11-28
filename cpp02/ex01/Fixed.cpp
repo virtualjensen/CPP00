@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 19:06:17 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/11/28 17:19:47 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/11/28 17:41:54 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ Fixed::Fixed(const int num){
 
 Fixed::Fixed(const float num){
     std::cout << "Float constructor callled" << std::endl;
-    this->setRawBits(num * (1 << this->fractionalBits));
+    this->setRawBits(roundf(num * (1 << this->fractionalBits)));
 }
 
 Fixed::~Fixed(){
