@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 19:06:02 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/11/27 14:13:08 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/11/28 16:15:18 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@ Fixed::Fixed() : fixedPointVal(0){
     std::cout << "Default constructor called" << std::endl;
 } // Default Constructor
 
-Fixed::Fixed(const Fixed &f) : fixedPointVal(f.getRawBits()){
+Fixed::Fixed(const Fixed &f){
     std::cout << "Copy constructor called" << std::endl;
+    fixedPointVal = f.getRawBits();
 } // Copy Constructor
 
 Fixed::~Fixed(){

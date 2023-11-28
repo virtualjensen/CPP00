@@ -6,13 +6,14 @@
 #    By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/23 19:00:50 by jebucoy           #+#    #+#              #
-#    Updated: 2023/11/28 13:08:50 by jebucoy          ###   ########.fr        #
+#    Updated: 2023/11/28 14:06:44 by jebucoy          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= 
+NAME	= fixedPoint
 
-SRCS	=
+SRCS	=	Fixed.cpp \
+			main.cpp \
 
 OBJS	= $(SRCS:.cpp=.o)
 
