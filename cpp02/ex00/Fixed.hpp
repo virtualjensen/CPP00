@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 18:08:39 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/11/23 15:32:35 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/11/28 12:54:22 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 class   Fixed{
     private:
         int fixedPointVal;
-        static const int bits = 8;
+        static const int fractionalBits = 8;
     public:
         Fixed();
         Fixed(const Fixed &f);

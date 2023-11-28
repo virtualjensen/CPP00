@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Fixed.cpp                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/23 19:06:02 by jebucoy           #+#    #+#             */
+/*   Updated: 2023/11/27 14:13:08 by jebucoy          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Fixed.hpp"
 
 Fixed::Fixed() : fixedPointVal(0){
@@ -14,8 +26,10 @@ Fixed::~Fixed(){
 
 Fixed& Fixed::operator=(const Fixed &Fixed){
     std::cout << "Copy assignment operator called" << std::endl;
-    this->fixedPointVal = Fixed.getRawBits();
-    return *this;
+    if (this != &Fixed){
+        this->fixedPointVal = Fixed.getRawBits();
+    }
+    return (*this);
 }
 
 int Fixed::getRawBits(void) const{

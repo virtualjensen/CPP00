@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 19:06:17 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/11/23 19:06:19 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/11/28 13:03:31 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,26 @@ Fixed::~Fixed(){
 
 Fixed& Fixed::operator=(const Fixed &Fixed){
     std::cout << "Copy assignment operator called" << std::endl;
-    this->fixedPointVal = Fixed.getRawBits();
-    return *this;
+    if (this != &Fixed){
+        this->fixedPointVal = Fixed.getRawBits();
+    }
+    return (*this);
+} // Copy Assignment Operator
+
+Fixed::Fixed(const int num){
+    this->setRawBits(num << this->fractionalBits);
+}
+
+Fixed::Fixed(const float num){
+    this->setRawBits(num * (1 << this->fractionalBits));
+}
+
+int Fixed::toInt(void) const{
+    return ((roundf)this->getRawBits() >> this->fractionalBits);
+}
+
+float   Fixed::toFloat(void) const{
+    return ((float)this->getRawBits() / (1 << this->fractionalBits));
 }
 
 int Fixed::getRawBits(void) const{
