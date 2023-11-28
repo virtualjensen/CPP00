@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 19:06:17 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/11/28 13:11:29 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/11/28 13:57:45 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ Fixed::Fixed(const float num){
 } // Parameterized (float) Constructor
 
 int Fixed::toInt(void) const{
-    return ((roundf)this->getRawBits() >> this->fractionalBits);
+    return (roundf(this->getRawBits() >> this->fractionalBits));
 }
 
 float   Fixed::toFloat(void) const{
