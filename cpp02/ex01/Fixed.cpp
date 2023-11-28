@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 19:06:17 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/11/28 13:03:31 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/11/28 13:11:29 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ Fixed& Fixed::operator=(const Fixed &Fixed){
 
 Fixed::Fixed(const int num){
     this->setRawBits(num << this->fractionalBits);
-}
+} // Parameterized (int) Constructor
 
 Fixed::Fixed(const float num){
     this->setRawBits(num * (1 << this->fractionalBits));
-}
+} // Parameterized (float) Constructor
 
 int Fixed::toInt(void) const{
     return ((roundf)this->getRawBits() >> this->fractionalBits);
