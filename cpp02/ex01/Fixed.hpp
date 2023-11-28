@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 19:04:00 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/11/28 14:10:51 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/11/28 17:13:26 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,6 @@ class   Fixed{
         int     toInt(void) const;
 };
 
-std::ostream &operator<<(std::ostream &obj, const Fixed f);
+std::ostream &operator<<(std::ostream &obj, const Fixed &f);
 
 #endif

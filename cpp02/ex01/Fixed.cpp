@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 19:06:17 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/11/28 14:15:40 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/11/28 17:19:47 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,12 @@ Fixed::Fixed(const Fixed &f) : fixedPointVal(f.getRawBits()){
 }
 
 Fixed::Fixed(const int num){
+    std::cout << "Int constructor callled" << std::endl;
     this->setRawBits(num << this->fractionalBits);
 }
 
 Fixed::Fixed(const float num){
+    std::cout << "Float constructor callled" << std::endl;
     this->setRawBits(num * (1 << this->fractionalBits));
 }
 
@@ -41,12 +43,10 @@ Fixed& Fixed::operator=(const Fixed &Fixed){
 }
 
 int Fixed::toInt(void) const{
-    std::cout << "Int constructor callled" << std::endl;
     return (roundf(this->getRawBits() >> this->fractionalBits));
 }
 
 float   Fixed::toFloat(void) const{
-    std::cout << "Float constructor callled" << std::endl;
     return ((float)this->getRawBits() / (1 << this->fractionalBits));
 }
 
@@ -60,7 +60,7 @@ void Fixed::setRawBits(int const raw){
     this->fixedPointVal = raw;
 }
 
-std::ostream &operator<<(std::ostream &obj, const Fixed f){
-    obj << f.toFloat();
-    return (obj);
+std::ostream &operator<<(std::ostream &os, const Fixed &f){
+    os << f.toFloat();
+    return (os);
 }
