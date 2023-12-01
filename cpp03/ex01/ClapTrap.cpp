@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 11:48:00 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/12/01 18:27:08 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/12/01 18:35:56 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	ClapTrap::takeDamage(unsigned int amount){
 	this->setHitPoints(this->getHitPoints() - amount);
 	std::cout << "ClapTrap " << this->name << " takes "
 		<< amount << " points of damage! " << std::endl;
-	if (this->getHitPoints() < 0)
+	if (this->getHitPoints() <= 0)
 		std::cout << "ClapTrap " << this->getName() << " ran out of hit points" << std::endl;
 }
 
@@ -121,3 +121,4 @@ void ClapTrap::noPointsMsg(){
 			std::cout << this->getName() << " ran out of hit points" << std::endl;
 		}
 }
+	
