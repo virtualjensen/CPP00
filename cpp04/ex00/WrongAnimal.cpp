@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 16:23:38 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/12/03 16:26:56 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/12/03 17:14:37 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,9 @@ WrongAnimal::~WrongAnimal(){
 
 void    WrongAnimal::makeSound() const{
     std::cout << "*Panicked WrongAnimal Noises*" << std::endl;
+}
+
+
+std::string WrongAnimal::getType() const{
+    return (this->type);
 }

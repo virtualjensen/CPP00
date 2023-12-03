@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 02:24:23 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/12/03 16:09:49 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/12/03 17:09:12 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ class   Animal{
         virtual ~Animal();
         
         virtual void    makeSound() const;
-        // std::string    getType();
+        std::string    getType() const;
         // void    setType(std::string type);
     
 };

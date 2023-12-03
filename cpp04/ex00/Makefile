@@ -6,7 +6,7 @@
 #    By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/03 16:34:09 by jebucoy           #+#    #+#              #
-#    Updated: 2023/12/03 17:06:34 by jebucoy          ###   ########.fr        #
+#    Updated: 2023/12/03 17:08:46 by jebucoy          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ SRCS	=	main.cpp \
 			WrongAnimal.cpp \
 			WrongCat.cpp \
 
-OBJS	=	$(SRCS:cpp=.o)
+OBJS	=	$(SRCS:.cpp=.o)
 
 CXX	= c++
 

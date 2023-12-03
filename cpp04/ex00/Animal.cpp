@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 15:36:56 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/12/03 16:14:46 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/12/03 17:09:46 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,10 @@ Animal &Animal::operator=(const Animal &copy){
 
 Animal::~Animal(){
     std::cout << "Animal destructor called." << std::endl;
+}
+
+std::string Animal::getType() const{
+    return (this->type);
 }
 
 void    Animal::makeSound() const{
