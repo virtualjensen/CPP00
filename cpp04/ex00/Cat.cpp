@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 16:08:53 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/12/03 16:21:37 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/12/03 17:42:41 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ Cat &Cat::operator=(const Cat &copy){
     if (this != &copy){
         this->type = copy.type;
     }
-    std::cout << "Cat copy constructor called." << std::endl;
+    std::cout << "Cat copy assignment operator called." << std::endl;
     return (*this);
 }
 
