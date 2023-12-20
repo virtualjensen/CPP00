@@ -6,15 +6,25 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 17:53:52 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/12/20 13:53:00 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/12/20 14:06:32 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
 
-Bureaucrat::Bureaucrat() : _name("Default"), _grade(150){}
+Bureaucrat::Bureaucrat() : _name("Default"), _grade(150){
+     if (_grade < 1)
+        throw GradeTooHighException();
+    if (_grade > 150)
+        throw GradeTooLowException();
+}
 
-Bureaucrat::Bureaucrat(const std::string name, int grade) : _name(name), _grade(grade){}
+Bureaucrat::Bureaucrat(const std::string name, int grade) : _name(name), _grade(grade){
+    if (grade < 1)
+        throw GradeTooHighException();
+    if (grade > 150)
+        throw GradeTooLowException();
+}
 
 Bureaucrat::Bureaucrat(const Bureaucrat &copy){
     _grade = copy._grade;
@@ -40,12 +50,15 @@ void Bureaucrat::incrementGrade(){
     if (_grade <= 1)
         throw GradeTooHighException();
     _grade--;
+    std::cout << this->_name << ", bureaucrat grade incremented" << std::endl;
 }
 
 void Bureaucrat::decrementGrade(){
     if (_grade >= 150)
         throw GradeTooLowException();
     _grade++;
+    std::cout << this->_name << ", bureaucrat grade decremented" << std::endl;
+
 }
 
 std::ostream &operator<<(std::ostream& os, const Bureaucrat& b){
