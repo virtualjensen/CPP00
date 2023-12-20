@@ -6,7 +6,7 @@
 #    By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/19 17:50:59 by jebucoy           #+#    #+#              #
-#    Updated: 2023/12/19 17:53:41 by jebucoy          ###   ########.fr        #
+#    Updated: 2023/12/20 13:57:45 by jebucoy          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ $(NAME)	:	$(OBJS)
 all	:	$(NAME)
 
 clean	:
-		rm -rf $(OBSJ)
+		rm -rf $(OBJS)
 
 fclean	:	clean
 		rm -rf $(NAME)
