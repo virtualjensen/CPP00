@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 18:25:57 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/12/20 19:37:59 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/12/21 20:43:35 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ Form::Form() : _name("Default"),
 }
 
 Form::Form(const std::string name, const int gradeToSign, const int gradeToExec) : 
-	_name(name), _gradeToSign(gradeToSign), _gradeToExec(gradeToExec){
+	_name(name), _isSigned(false), _gradeToSign(gradeToSign), _gradeToExec(gradeToExec){
 	if (_gradeToExec > 150 || _gradeToSign > 150)
 		throw GradeTooLowException();
 	if (_gradeToExec < 1 || _gradeToSign < 1)

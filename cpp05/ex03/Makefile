@@ -6,17 +6,21 @@
 #    By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/19 17:50:59 by jebucoy           #+#    #+#              #
-#    Updated: 2023/12/21 21:05:37 by jebucoy          ###   ########.fr        #
+#    Updated: 2023/12/21 21:08:33 by jebucoy          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	=	Form
+NAME	=	Intern
 
 CXX	= c++
 
 CXXFLAGS	=	-Wall -Wextra -Werror -std=c++98
 
-SRCS	=	Form.cpp \
+SRCS	=	AForm.cpp \
+			Intern.cpp \
+			RobotomyRequestForm.cpp \
+			PresidentialPardonForm.cpp \
+			ShrubberyCreationForm.cpp \
 			Bureaucrat.cpp \
 			main.cpp	\
 

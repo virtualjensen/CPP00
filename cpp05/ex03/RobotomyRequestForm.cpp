@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 21:23:40 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/12/21 20:47:00 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/12/21 20:54:57 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,10 @@ RobotomyRequestForm &RobotomyRequestForm::operator=(const RobotomyRequestForm &c
 RobotomyRequestForm::~RobotomyRequestForm(){}
 
 void	RobotomyRequestForm::execute(Bureaucrat const & executor) const {
-	if (getSign() == false){
+	if (getSign() == false)
 		throw FormNotSigned();
-	}
-	if (executor.getGrade() > getExecGrade()){
+	if (executor.getGrade() > getExecGrade())
 		throw GradeTooLowException();
-	}
 	std::cout << "******DRILLING NOISE******" << std::endl;
 	std::srand((unsigned int)(time(NULL)));
 	if (std::rand() % 2 == 0){
