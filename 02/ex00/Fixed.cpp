@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 19:06:02 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/11/28 16:15:18 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/11/29 15:13:13 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,3 +42,4 @@ void Fixed::setRawBits(int const raw){
     std::cout << "setRawBits member function called" << std::endl;
     this->fixedPointVal = raw;
 }
+
