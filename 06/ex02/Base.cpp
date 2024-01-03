@@ -26,25 +26,34 @@ Base *generate(void){
 }
 
 void identify(Base *p){
-    std::cout << "Pointer: ";
     if (dynamic_cast<A*>(p))
-        std::cout << "The type is A" << std::endl;
+        std::cout << "Pointer type is A" << std::endl;
     else if (dynamic_cast<B*>(p))
-        std::cout << "The type is B" << std::endl;
+        std::cout << "Pointer type is B" << std::endl;
     else if (dynamic_cast<C*>(p))
-        std::cout << "The type is C" << std::endl;
-    else
-        std::cout << "Unknown Type" << std::endl;
+        std::cout << "Pointer type is C" << std::endl;
 }
 
 void identify(Base &p){
-    std::cout << "Reference: ";
-    if (dynamic_cast<A*>(&p))
-        std::cout << "The type is A" << std::endl;
-    else if (dynamic_cast<B*>(&p))
-        std::cout << "The type is B" << std::endl;
-    else if (dynamic_cast<C*>(&p))
-        std::cout << "The type is C" << std::endl;
-    else
-        std::cout << "Unknown Type" << std::endl;
+    try{
+        A &a = (dynamic_cast<A&>(p));
+        std::cout << "Reference type is A" << std::endl;
+        (void)a;
+        return ;
+    }
+    catch (std::exception &e){};
+    try{
+        B &b = (dynamic_cast<B&>(p));
+        std::cout << "Reference type is B" << std::endl;
+        (void)b;
+        return ;
+    }
+    catch (std::exception &e){};
+    try{
+        C &c = (dynamic_cast<C&>(p));
+        std::cout << "Reference type is C" << std::endl;
+        (void)c;
+        return ;
+    }
+    catch (std::exception &e){};
 }
