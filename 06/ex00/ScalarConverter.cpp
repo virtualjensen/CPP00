@@ -91,14 +91,14 @@ static bool    isDouble(std::string input){
 }
 
 static bool    isPseudo(std::string literal){
-    if (literal == "-inf" || literal == "+inf" || literal == "nan"){
+    if (literal == "-inf" || literal == "+inf" || literal == "inf" || literal == "nan"){
         std::cout << "char: impossible" << std::endl;
         std::cout << "int: impossible" << std::endl;
         std::cout << "float: " << literal << "f" << std::endl;
         std::cout << "double: " << literal << std::endl;
         return true ;
     }
-    else if (literal == "-inff" || literal == "+inff" || literal == "nanf"){
+    else if (literal == "-inff" || literal == "+inff" || literal == "inff" || literal == "nanf"){
         std::cout << "char: impossible" << std::endl;
         std::cout << "int: impossible" << std::endl;
         std::cout << "float: " << literal << std::endl;
