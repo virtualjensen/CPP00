@@ -17,8 +17,11 @@ class PmergeMe{
         std::deque<int>     _dqNum;
         bool                _error;
         int                 _last;
+
         std::vector<std::pair<int, int> > createPairVec();
         void    sortPairVec(std::vector<std::pair<int, int> > &pairs);
+        void    sortPairSequenceVec(std::vector<std::pair<int,int> > &pair, size_t n);
+
         PmergeMe();
 
     public:
@@ -27,6 +30,8 @@ class PmergeMe{
         PmergeMe &operator=(const PmergeMe&);
         ~PmergeMe();
 
+        std::vector<int>    mergeInsertionVec();
+        
         template <typename Container>
         void printContainer(const Container& cont) const {
             typename Container::const_iterator it;
@@ -36,7 +41,6 @@ class PmergeMe{
             std::cout << std::endl;
         }
         
-        void    sortPairSequenceVec(std::vector<std::pair<int,int> > &pair, size_t n);
 
 };
 #endif

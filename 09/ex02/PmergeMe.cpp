@@ -7,11 +7,12 @@
 //5 create a new sequence that holds the first pair and the second number in each pair
 //6 insert remaining numbers in sorted sequence (optimized sorting binary insertion sequence shenanigans)
 
+// show time it takes to sort
+//fix error handling
 PmergeMe::~PmergeMe() {}
 
-PmergeMe::PmergeMe(char **av){
+PmergeMe::PmergeMe(char **av) :  _error(false), _last(-1) {
     //1 stores number in container
-    _error = false;
     for (int i =1; av[i] && !_error; i++){
         if ((std::string(av[i]).length() > 10 )
             || std::string(av[i]).find_first_not_of("0123456789+") != std::string::npos){
@@ -23,11 +24,10 @@ PmergeMe::PmergeMe(char **av){
             _error = true;
         else {
             _vecNum.push_back(num);
-            _dqNum.push_back(num);
+            // _dqNum.push_back(num);
         }
     }
     printContainer(_vecNum);
-    printContainer(_dqNum);
 }
 
 //2 make a pair of each two consecutive numbers 
@@ -37,8 +37,8 @@ std::vector<std::pair<int, int>> PmergeMe::createPairVec(){
         _last = _vecNum[_vecNum.size() - 1];
         _vecNum.pop_back();
     }
-    for (std::vector<int>::iterator it = _vecNum.begin(); it != _vecNum.end(); it++) {
-        pair.push_back(std::make_pair(*it, *(++it)));
+    for (std::vector<int>::iterator it = _vecNum.begin(); it != _vecNum.end(); ++it) {
+        pair.push_back(std::make_pair(*it, *(it++)));
     }
     return pair;
 }
@@ -63,5 +63,56 @@ void PmergeMe::sortPairSequenceVec(std::vector<std::pair<int, int>>& pairs, std:
         }
     }
     sortPairSequenceVec(pairs, n - 1);
+}
+
+std::vector<int>    PmergeMe::mergeInsertionVec(){
+    std::vector<std::pair<int,int> > pair;
+
+    pair = createPairVec();
+    std::cout << "pair creation: ";
+    for (std::vector<std::pair<int,int> >::iterator it = pair.begin();
+        it != pair.end(); it++){
+            std::cout << "{" << it->first << ", " << it->second << "} "; 
+        }
+        std::cout << std::endl;
+    sortPairVec(pair);
+    std::cout << "sort pairing: ";
+    for (std::vector<std::pair<int,int> >::iterator it = pair.begin();
+        it != pair.end(); it++){
+            std::cout << "{" << it->first << ", " << it->second << "} "; 
+        }
+        std::cout << std::endl;
+    sortPairSequenceVec(pair, pair.size());
+    std::cout << "sorting: ";
+    for (std::vector<std::pair<int,int> >::iterator it = pair.begin();
+        it != pair.end(); it++){
+            std::cout << "{" << it->first << ", " << it->second << "} "; 
+        }
+        std::cout << std::endl;
+
+    std::vector<int> sorted;
+    std::vector<int> unsorted;
+
+    std::vector<std::pair<int,int> >::iterator firstPair = pair.begin();
+    sorted.push_back(firstPair->first);
+    sorted.push_back(firstPair->second);
+
+    for (std::vector<std::pair<int,int> >::iterator it = pair.begin() + 1; it < pair.end(); it++){
+        sorted.push_back(it->second);
+        unsorted.push_back(it->first);
+    }
+
+    std::vector<int>::iterator it;
+    while(unsorted.size() > 0){
+        it = std::lower_bound(sorted.begin(), sorted.end(), unsorted.back());
+        sorted.insert(it, unsorted.back());
+        unsorted.pop_back();
+    }
+
+    if (_last != -1){
+        it = std::lower_bound(sorted.begin(), sorted.end(), _last);
+        sorted.insert(it, _last);
+    }
+    return (sorted);
 }
 
