@@ -1,177 +1,214 @@
 #include "BitcoinExchange.hpp"
 
-BitcoinExchange::BitcoinExchange(const std::string &file) {
-    this->_input.open(file.c_str());
-    if (!this->_input.is_open()){
-        std::cout << "Error in opening input file" << std::endl;
-        return ;
-    }
-    this->_dbFile.open(DATA_FILE);
-    if (!this->_dbFile.is_open()){
-        std::cerr << "Error in opening Database file" << std::endl;
-        return ; // fix error
-    }
-    if(this->_dbFile.fail()){
-        std::cerr << "Database permission denied" << std::endl;
-        return ;
-    }
-    storeDB();
+double _stod(std::string s)
+{
+	std::stringstream ss(s);
+	double i;
+
+	ss >> i;
+	return i;
 }
 
-BitcoinExchange::BitcoinExchange() {}
 
-BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange& og){
-    this->_db = og._db;
-    return *this;
+std::list<std::string> split(std::string str, char sep)
+{
+	std::list<std::string> list;
+	std::stringstream ss(str);
+	std::string buff;
+
+	while (std::getline(ss, buff, sep))
+		list.push_back(buff);
+	return list;
 }
 
-BitcoinExchange::BitcoinExchange(const BitcoinExchange& og){
-    *this = og;
+static bool isInt(const std::string& s)
+{
+	for (size_t i = 0; i < s.length(); i++)
+	{
+		if (!std::isdigit(s[i]))
+			return (false);
+	}
+	return (true);
+}
+
+static bool isFloat(const std::string& s)
+{
+	bool pointReached = false;
+
+	for (size_t i = 0; i < s.length(); i++)
+	{
+		if (!std::isdigit(s[i]))
+		{
+			if (!pointReached && s[i] == '.' && i+1 != s.length())
+				pointReached = true;
+			else if (!pointReached && s[i] == '.' && i+1 == s.length())
+				return false;
+			else if (pointReached || s[i] != '.')
+				return (false);
+		}
+	}
+	return (true);
+}
+
+BitcoinExchange::BitcoinExchange()
+{
+	storeDB("data.csv", this->_db, ',');	
+}
+
+BitcoinExchange::BitcoinExchange(const BitcoinExchange& src)
+{
+	*this = src;
+}
+
+BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& src)
+{
+	if (this == &src)
+		return *this;
+	this->_db = src._db;
+	return *this;
 }
 
 BitcoinExchange::~BitcoinExchange() {}
 
+void BitcoinExchange::storeDB(std::string fileName,
+	std::map<std::string, double>& db,
+	char dateSep)
+{
+	bool isFirst = true;
+	std::fstream file(std::string(fileName).c_str(), std::fstream::in);
+	std::stringstream stream;
+	std::string buff;
+
+	if (file.fail())
+		throw BadFile();
+
+	stream << file.rdbuf();
+	while (std::getline(stream, buff, '\n'))
+	{
+		if ((buff.length() == 0) || isFirst)
+		{
+			isFirst = false;
+			continue;
+		}
+		std::size_t sep = buff.find(dateSep);
+		std::string dateString = buff.substr(0, sep);
+		std::string valueString = buff.substr(sep + 1);
+		if ((dateString.length() == 0) || (valueString.length() == 0) || !isFloat(valueString))
+			throw BadFile();
+		std::list<std::string> dateList = split(dateString, '-');
+		db[dateString] = _stod(valueString);
+	}
+}
+
+
+void BitcoinExchange::calculate(std::string fileName,
+	char dateSep)
+{
+	bool isFirst = true;
+	std::fstream file(std::string(fileName).c_str(), std::fstream::in);
+	std::stringstream stream;
+	std::string buff;
+
+	if (file.fail())
+		throw BadFile();
+
+	stream << file.rdbuf();
+	while (std::getline(stream, buff, '\n'))
+	{
+		if ((buff.length() == 0) || isFirst)
+		{
+			isFirst = false;
+			continue;
+		}
+
+		std::size_t sep = buff.find(dateSep);
+
+		if (sep == std::string::npos)
+		{
+			std::cout <<  "Error: bad input => " + buff << "\n";
+			continue ;
+		}
+		std::string dateString = buff.substr(0, sep - 1);
+		std::string valueString = buff.substr(sep+2);
+		std::list<std::string> dateList = split(dateString, '-');
+		double val = ( _stod(valueString) );
+		if (isBadDate(dateList))
+			std::cout << "Error: bad input => " << dateString << "\n";
+		else if ((val < 0) || !isFloat(valueString))
+			std::cout <<  "Error: not a positive number.\n";
+		else if (val > 1000)
+			std::cout << "Error: too large a number.\n";
+		else
+		{
+			std::cout << dateString << " => " << valueString << " = " <<
+				val * findNearsetDate(dateString) << "\n";
+		}
+	}
+}
+
 bool    BitcoinExchange::isLeapYear(int year){
-    if ((year % 400 == 0 && year % 100 != 0) || (year % 400 == 0))
+    if (!(year % 400) || (!(year % 4) && (year % 100)))
         return true ;
     return false ;
 }
 
-void BitcoinExchange::storeDB()
-{
-    std::string buf;
-    std::string key;
-    std::string val;
+bool BitcoinExchange::isBadDate(std::list<std::string> dateList) {
+    int type = 0; // year(0) - month(1) - day(2)
+    int year = 0;
+    int month = 0;
+    int day = 0;
 
-    while (getline(this->_dbFile, buf))
-    {
-        if (buf == "date,exchange_rate")
-            continue;
-        std::stringstream stream(buf);
-        std::getline(stream, key, ',');
-        std::getline(stream, val, ',');
+    for (std::list<std::string>::iterator it = dateList.begin(); it != dateList.end(); it++) {
+        if (!isInt(*it))
+            return true;
         
-        std::stringstream streamval(val);
-        double converted_val;
+        std::stringstream ss(*it);
+        int i;
+        ss >> i;
 
-        streamval >> converted_val;
-        if (streamval.fail() == true)
-            throw std::runtime_error("Conversion Failed in DB");
+        switch (type) {
+            case 0:
+                year = i;
+                break;
+            case 1:
+                month = i;
+                break;
+            case 2:
+                day = i;
+                break;
+        }
 
-        this->_db.insert(std::pair< std::string, double >(key, converted_val));
+        if ((i <= 0) || (i > std::numeric_limits<int>::max()))
+            return true;
+        if ((type == 1) && (i > 12))
+            return true;
+        if (type == 2 && (i > 31))
+            return true;
+        ++type;
     }
+    if (!isLeapYear(year)) {
+        if (month == 2 && day > 28)
+            return true;
+    }
+    if ((month == 4 || month == 6 || month == 9 || month == 11) && (day > 30))
+        return true;
+    return false;
 }
 
-void BitcoinExchange::run()
+double BitcoinExchange::findNearsetDate(std::string date)
 {
-    std::string buf = "";
-    std::string key = "";
-    std::string val = "";
+	if (_db.count(date) == 1)
+		return (_db.at(date));
+	_db[date] = 0;
+	std::map<std::string, double>::iterator it =  _db.find(date);
+	if (it != _db.begin())
+		--it;
+	double val = ((*it).second);
+	_db.erase(++it);
+	return val;
+}
 
-    std::getline(this->_input, buf);
-
-    if (buf != "date | value")
-    {
-        throw std::runtime_error("file empty or incorrect format error");
-    }
-
-    while(std::getline(this->_input, buf))
-    {
-        if (buf.find_first_of('|') != buf.find_last_of('|')
-            || buf.find_first_of('.') != buf.find_last_of('.'))
-        {
-            std::cout << "Error: bad input" << " " << buf << std::endl;
-            continue;
-        }
-
-        std::stringstream stream(buf);
-        std::getline(stream, key, '|');
-        std::getline(stream, val, '|');
-
-        size_t find = 0;
-
-        while (find != std::string::npos)
-        {
-            find = key.find_first_of(' ');
-            if (find != std::string::npos)
-                key.erase(find, 1);
-        }
-
-        find = 0;
-
-        while (find != std::string::npos)
-        {
-            find = val.find_first_of(' ');
-            if (find != std::string::npos)
-                val.erase(find, 1);
-        }
-
-        std::stringstream streamval(val);
-        double converted_val;
-
-        streamval >> converted_val;
-        if (streamval.fail() == true)
-        {
-            std::cout << "Error: Conversion failed" << std::endl;
-            continue;
-        }
-
-        if (converted_val < 0)
-        {
-            std::cout << "Error: not a positive number" << std::endl;
-            continue;
-        }
-
-        if (converted_val > 1000)
-        {
-            std::cout << "Error: too large a number." << std::endl;
-            continue;
-        }
-
-		if (val.empty() == true || key.empty() == true)
-		{
-			std::cout << "Error: bad input" << " " << buf << std::endl;
-            continue;
-		}
-
-        for (int i = 0; i < (int)key.size(); i++)
-        {
-            if (isdigit(key[i]) == false && key[i] != '-' && key[i] != ' ')
-            {
-                std::cout << "date format incorrect!" << std::endl;
-                continue;
-            }
-        }
-
-        const char * date_str = key.c_str();
-
-        struct tm time_struct;
-
-        if (strptime(date_str, "%Y-%m-%d", &time_struct) != NULL)
-        {
-            for (int i = 0; i < (int)val.size(); i++)
-            {
-                if (isdigit(val[i]) == false && val[i] != '.' && val[i] != ' ')
-                {
-                    std::cout << "val format incorrect!" << std::endl;
-                    continue;
-                }
-            }
-
-            std::map<std::string, double>::iterator it = this->_db.lower_bound(key);
-            if (it->first != key)
-            {
-                if (it != this->_db.begin())
-                    it--;
-            }
-
-            double sol = it->second * converted_val;
-
-            std::cout << key << " => " << val << " = " << sol << std::endl;
-        }
-        else
-        {
-            std::cout << "Date is not correctly formatted." << std::endl;
-        }
-    }
+const char *BitcoinExchange::BadFile::what() const throw()
+{
+	return ("could not open file.");
 }

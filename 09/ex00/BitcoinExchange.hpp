@@ -1,31 +1,51 @@
-#ifndef BITCOINEXCHANGE_HPP
-#define BITCOINEXCHANGE_HPP
 
-#define DATA_FILE "data.csv"
+#pragma once
 
-#include <map>
-#include <sstream>
 #include <iostream>
-#include <string>
 #include <fstream>
-#include <cstdlib>
+#include <string>
+#include <sstream>
+#include <map>
+#include <list>
+#include <exception>
+#include <limits>
 
-class BitcoinExchange{
-    private:
-        bool    isLeapYear(int year);
-        void    storeDB();
-        std::map<std::string, double> _db;
-        std::ifstream _dbFile;
-        std::ifstream _input;
-    public:
-        BitcoinExchange();
-        BitcoinExchange(const std::string &file);
-        BitcoinExchange(const BitcoinExchange&);
-        BitcoinExchange &operator=(const BitcoinExchange&);
-        ~BitcoinExchange();
-        void    run();
+std::list<std::string> split(std::string str, char sep);
 
-        
+class BitcoinExchange
+{
+	private:
+		struct Date
+		{
+			std::string year;
+			int month;
+			int day;
+		};
+
+		std::map<std::string, double> _db;
+
+		void storeDB(std::string fileName,
+			std::map<std::string, double>& db,
+			char dateSep);
+		
+        bool isLeapYear(int year);
+		bool isBadDate(std::list<std::string> dateList);
+		double findNearsetDate(std::string date);
+		
+
+		class BadFile : public std::exception {
+			public:
+				const char *what() const throw();
+		};
+	
+	public:
+		BitcoinExchange();
+		BitcoinExchange(const BitcoinExchange& src);
+		BitcoinExchange& operator=(const BitcoinExchange& src);
+		~BitcoinExchange();
+
+		void printDB();
+		void calculate(std::string fileName, char dateSep);
+
+		
 };
-
-#endif
