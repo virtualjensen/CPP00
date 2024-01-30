@@ -9,18 +9,23 @@
 #include <algorithm>
 #include <utility>
 #include <iostream>
+#include <exception>
+#include <ctime>
 
 
 class PmergeMe{
     private:
         std::vector<int>    _vecNum;
         std::deque<int>     _dqNum;
-        bool                _error;
         int                 _last;
 
         std::vector<std::pair<int, int> > createPairVec();
         void    sortPairVec(std::vector<std::pair<int, int> > &pairs);
         void    sortPairSequenceVec(std::vector<std::pair<int,int> > &pair, size_t n);
+
+        std::deque<std::pair<int, int> > createPairDq();
+        void    sortPairDq(std::deque<std::pair<int, int> > &pairs);
+        void    sortPairSequenceDq(std::deque<std::pair<int,int> > &pair, size_t n);
 
         PmergeMe();
 
@@ -31,6 +36,8 @@ class PmergeMe{
         ~PmergeMe();
 
         std::vector<int>    mergeInsertionVec();
+        std::deque<int>    mergeInsertionDq();
+        void    run();
         
         template <typename Container>
         void printContainer(const Container& cont) const {
