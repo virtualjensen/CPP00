@@ -1,5 +1,6 @@
 
-#pragma once
+#ifndef BITCOINEXCHANGE_HPP
+#define BITCOINEXCHANGE_HPP
 
 #include <iostream>
 #include <fstream>
@@ -15,12 +16,6 @@ std::list<std::string> split(std::string str, char sep);
 class BitcoinExchange
 {
 	private:
-		struct Date
-		{
-			std::string year;
-			int month;
-			int day;
-		};
 
 		std::map<std::string, double> _db;
 
@@ -32,11 +27,6 @@ class BitcoinExchange
 		bool isBadDate(std::list<std::string> dateList);
 		double findNearsetDate(std::string date);
 		
-
-		class BadFile : public std::exception {
-			public:
-				const char *what() const throw();
-		};
 	
 	public:
 		BitcoinExchange();
@@ -44,8 +34,9 @@ class BitcoinExchange
 		BitcoinExchange& operator=(const BitcoinExchange& src);
 		~BitcoinExchange();
 
-		void printDB();
 		void calculate(std::string fileName, char dateSep);
 
 		
 };
+
+#endif
