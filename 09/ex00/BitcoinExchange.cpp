@@ -21,7 +21,7 @@ BitcoinExchange::BitcoinExchange(const std::string &file) {
 BitcoinExchange::BitcoinExchange() {}
 
 BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange& og){
-    *this = og;
+    this->_db = og._db;
     return *this;
 }
 
@@ -88,7 +88,6 @@ void BitcoinExchange::run()
         std::getline(stream, key, '|');
         std::getline(stream, val, '|');
 
-        // space strip.
         size_t find = 0;
 
         while (find != std::string::npos)

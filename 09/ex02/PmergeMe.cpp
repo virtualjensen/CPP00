@@ -7,9 +7,18 @@
 //5 create a new sequence that holds the first pair and the second number in each pair
 //6 insert remaining numbers in sorted sequence (optimized sorting binary insertion sequence shenanigans)
 
-// show time it takes to sort
-//fix error handling
 PmergeMe::~PmergeMe() {}
+
+PmergeMe &PmergeMe::operator=(const PmergeMe &og){
+    this->_vecNum = og._vecNum;
+    this->_dqNum = og._dqNum;
+    this->_last = og._last;
+    return *this;
+}
+
+PmergeMe::PmergeMe(const PmergeMe& og){
+    *this = og;
+}
 
 PmergeMe::PmergeMe(char **av) :  _last(-1) {
     //1 stores number in container
