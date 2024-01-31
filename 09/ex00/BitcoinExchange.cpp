@@ -128,8 +128,13 @@ void BitcoinExchange::calculate(std::string fileName,
 			std::cout <<  "Error: bad input => " + buff << "\n";
 			continue ;
 		}
+        if (buff.find_first_of(dateSep) != buff.find_last_of(dateSep))
+		{
+			std::cout <<  "Error: bad input => " + buff << "\n";
+			continue ;
+		}
 		std::string dateString = buff.substr(0, sep - 1);
-		std::string valueString = buff.substr(sep+2);
+		std::string valueString = buff.substr(sep+1);
 		std::list<std::string> dateList = split(dateString, '-');
 		double val = ( _stod(valueString) );
 		if (isBadDate(dateList))
