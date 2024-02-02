@@ -33,23 +33,11 @@ static bool isInt(const std::string& s)
 
 static bool isFloat(const std::string& s)
 {
-	bool pointReached = false;
-
-	for (size_t i = 0; i < s.length(); i++)
-	{
-		if (!std::isdigit(s[i]))
-		{
-			if (!pointReached && s[i] == '.' && i+1 != s.length())
-				pointReached = true;
-			else if (!pointReached && s[i] == '.' && i+1 == s.length())
-				return (false);
-			else if (pointReached || s[i] != '.')
-				return (false);
-		}
-	}
-	// s.find_first_not_of("0123456789.") != std::string::npos; -> error
-	// s.find_first_of(".") != s.find_last_of(".") -> error
-	return (true);
+	if (s.find_first_not_of("0123456789.") != std::string::npos)
+		return false;
+	if (s.find_first_of(".") != s.find_last_of("."))
+		return false;
+	return true;
 }
 
 BitcoinExchange::BitcoinExchange()
