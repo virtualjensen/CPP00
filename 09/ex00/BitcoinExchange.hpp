@@ -10,6 +10,7 @@
 #include <list>
 #include <exception>
 #include <limits>
+#include <cctype>
 
 std::list<std::string> split(std::string str, char sep);
 
@@ -25,7 +26,7 @@ class BitcoinExchange
 		
         bool isLeapYear(int year);
 		bool isBadDate(std::list<std::string> dateList);
-		double findNearsetDate(std::string date);
+		double getDateVal(std::string date);
 		
 	
 	public:

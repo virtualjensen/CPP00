@@ -85,9 +85,20 @@ void BitcoinExchange::storeDB(std::string fileName,
 		std::string valueString = buff.substr(sep + 1);
 		if ((dateString.length() == 0) || (valueString.length() == 0) || !isFloat(valueString))
 			throw std::runtime_error("Error: could not open file.");
-		std::list<std::string> dateList = split(dateString, '-');
 		db[dateString] = _stod(valueString);
 	}
+}
+
+static std::string	stripSpace(std::string tmp, int flag){
+	std::string ret;
+	for (size_t i = 0; i < tmp.length(); i++){
+		if (flag == 1 && !std::isspace(tmp[i]))
+			ret += tmp[i];
+		else if (flag == 2 && (!std::isspace(tmp[i]) && tmp[i] != '|')){
+			ret += tmp[i];
+		}
+	}
+	return ret;
 }
 
 
@@ -123,13 +134,19 @@ void BitcoinExchange::calculate(std::string fileName,
 			std::cout <<  "Error: bad input => " + buff << "\n";
 			continue ;
 		}
-		std::string dateString = buff.substr(0, sep - 1);
-		std::string valueString = buff.substr(sep+2);
+
+
+
+		std::string tmpDate = buff.substr(0, sep);
+		std::string dateString = stripSpace(tmpDate, 2);
+
+
+		std::string tmpVal = buff.substr(sep + 1);
+		std::string valueString = stripSpace(tmpVal, 1); // removes space and only gets the number in the string
+
 		std::list<std::string> dateList = split(dateString, '-');
 		double val = ( _stod(valueString) );
-		if ((dateString.empty() && !isFirst))
-			std::cout << "Error: bad input => " << dateString << "\n";
-		else if (isBadDate(dateList))
+		if (isBadDate(dateList))
 			std::cout << "Error: bad input => " << dateString << "\n";
 		else if ((val < 0) || !isFloat(valueString))
 			std::cout <<  "Error: not a positive number.\n";
@@ -138,7 +155,7 @@ void BitcoinExchange::calculate(std::string fileName,
 		else
 		{
 			std::cout << dateString << " => " << valueString << " = " <<
-				val * findNearsetDate(dateString) << "\n";
+				(val * getDateVal(dateString)) << "\n";
 		}
 	}
 }
@@ -194,13 +211,13 @@ bool BitcoinExchange::isBadDate(std::list<std::string> dateList) {
     return false;
 }
 
-double BitcoinExchange::findNearsetDate(std::string date)
+double BitcoinExchange::getDateVal(std::string date)
 {
-	if (_db.count(date) == 1)
-		return (_db.at(date));
-	_db[date] = 0;
-	std::map<std::string, double>::iterator it =  _db.find(date);
-	if (it != _db.begin())
+	std::map<std::string, double>::iterator it =  _db.lower_bound(date);
+	if (it == _db.end())
+		_db[date] = 0;
+	_db[it->first] = it->second;
+	if (it != _db.begin() && it->first != date)
 		--it;
 	double val = ((*it).second);
 	return val;
