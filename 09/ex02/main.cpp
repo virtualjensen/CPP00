@@ -9,6 +9,10 @@ int main(int ac, char **av) {
 
     try{
         PmergeMe p(av);
+        if (p.sorted == true){
+            std::cout << "Elements already sorted" << std::endl;
+            return 0; 
+        }
         p.run();
     }catch (std::exception &e){
         std::cout << e.what() << std::endl;

@@ -1,4 +1,5 @@
 #include "RPN.hpp"
+#include <iomanip>
 
 int main(int ac, char **av){
     if (ac != 2){
@@ -7,7 +8,7 @@ int main(int ac, char **av){
     }
     RPN rpn;
     try {
-        int result = rpn.calculate(av[1]);
+        double result = rpn.calculate(av[1]);
         std::cout << "Result: " << result << std::endl;
     } 
     catch (const std::exception& e) {

@@ -27,6 +27,7 @@ class PmergeMe{
         void    sortPairDq(std::deque<std::pair<int, int> > &pairs);
         void    sortPairSequenceDq(std::deque<std::pair<int,int> > &pair, size_t n);
 
+        void    checkSort();
         PmergeMe();
 
     public:
@@ -35,6 +36,7 @@ class PmergeMe{
         PmergeMe &operator=(const PmergeMe&);
         ~PmergeMe();
 
+        bool                sorted;
         std::vector<int>    mergeInsertionVec();
         std::deque<int>    mergeInsertionDq();
         void    run();

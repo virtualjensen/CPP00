@@ -10,15 +10,16 @@ double _stod(std::string s)
 }
 
 
-std::list<std::string> split(std::string str, char sep)
+std::map<size_t, std::string> split(std::string str, char sep)
 {
-	std::list<std::string> list;
+	std::map<size_t, std::string> dateMap;
 	std::stringstream ss(str);
 	std::string buff;
+	int i = 0;
 
 	while (std::getline(ss, buff, sep))
-		list.push_back(buff);
-	return list;
+		dateMap[i++] = buff;
+	return dateMap;
 }
 
 static bool isInt(const std::string& s)
@@ -91,13 +92,19 @@ void BitcoinExchange::storeDB(std::string fileName,
 
 static std::string	stripSpace(std::string tmp, int flag){
 	std::string ret;
-	for (size_t i = 0; i < tmp.length(); i++){
-		if (flag == 1 && !std::isspace(tmp[i]))
-			ret += tmp[i];
-		else if (flag == 2 && (!std::isspace(tmp[i]) && tmp[i] != '|')){
-			ret += tmp[i];
-		}
-	}
+	bool inBetween = false; // flag to indicate if we are in-between non-white space characters
+    for (size_t i = 0; i < tmp.length(); i++) {
+        if (flag == 1) {
+            if (!std::isspace(tmp[i]) || inBetween) {
+                ret += tmp[i];
+                if (!std::isspace(tmp[i])) // If non-white space, set inBetween flag
+                    inBetween = true;
+            }
+        } else if (flag == 2 && (!std::isspace(tmp[i]) && tmp[i] != '|')) {
+            ret += tmp[i];
+            inBetween = true; // If non-white space or not '|' character, set inBetween flag
+        }
+    }
 	return ret;
 }
 
@@ -124,17 +131,14 @@ void BitcoinExchange::calculate(std::string fileName,
 
 		std::size_t sep = buff.find(dateSep);
 
-		if (sep == std::string::npos)
-		{
-			std::cout <<  "Error: bad input => " + buff << "\n";
-			continue ;
-		}
-        if (buff.find_first_of(dateSep) != buff.find_last_of(dateSep))
+		if (sep == std::string::npos || (buff.find_first_of(dateSep) != buff.find_last_of(dateSep)))
 		{
 			std::cout <<  "Error: bad input => " + buff << "\n";
 			continue ;
 		}
 
+		if (buff.length() == 0)
+			continue;
 
 
 		std::string tmpDate = buff.substr(0, sep);
@@ -144,9 +148,9 @@ void BitcoinExchange::calculate(std::string fileName,
 		std::string tmpVal = buff.substr(sep + 1);
 		std::string valueString = stripSpace(tmpVal, 1); // removes space and only gets the number in the string
 
-		std::list<std::string> dateList = split(dateString, '-');
+		_dateList = split(dateString, '\n');
 		double val = ( _stod(valueString) );
-		if (isBadDate(dateList))
+		if (isBadDate(dateString) || dateString.length() == 0 || valueString.length() == 0)
 			std::cout << "Error: bad input => " << dateString << "\n";
 		else if ((val < 0) || !isFloat(valueString))
 			std::cout <<  "Error: not a positive number.\n";
@@ -164,60 +168,40 @@ bool    BitcoinExchange::isLeapYear(int year){
 	return (!(year % 400) || (!(year % 4) && (year % 100)));
 }
 
-bool BitcoinExchange::isBadDate(std::list<std::string> dateList) {
-    int type = 0; // year(0) - month(1) - day(2)
-    int year = 0;
-    int month = 0;
-    int day = 0;
+bool BitcoinExchange::isBadDate(std::string date) {
+	std::map<size_t, std::string> x = split(date, '-');
+	std::string year = x[0];
+	std::string month = x[1];
+	std::string day = x[2];
+	if (year.length() != 4 || month.length() != 2 || day.length() != 2)
+		return true;
+	if (!isInt(year) || !isInt(month) || !isInt(day))
+		return true;
+	int y = atol(year.c_str());
+	int m = atoi(month.c_str());
+	int d = atoi(day.c_str());
 
-    for (std::list<std::string>::iterator it = dateList.begin(); it != dateList.end(); it++) {
-        if (!isInt(*it))
-            return true;
-        
-        std::stringstream ss(*it);
-        int i;
-        ss >> i;
-
-        switch (type) {
-            case 0:
-                year = i;
-                break;
-            case 1:
-                month = i;
-                break;
-            case 2:
-                day = i;
-                break;
-        }
-
-        if ((i <= 0) || (i > std::numeric_limits<int>::max()))
-            return true;
-        if ((type == 1) && (i > 12))
-            return true;
-        if (type == 2 && (i > 31))
-            return true;
-        ++type;
-    }
-    if (!isLeapYear(year)) {
-        if (month == 2 && day > 28)
-            return true;
-    }
-    else if (isLeapYear(year)) {
-        if (month == 2 && day > 29)
-            return true;
-    }
-    if ((month == 4 || month == 6 || month == 9 || month == 11) && (day > 30))
+	if ((m > 12) || (d > 31))
+		return true;
+	if (!isLeapYear(y) && m == 2 && d > 28)
+		return true;
+	else if (isLeapYear(y) && m == 2 && d > 29)
+		return true;
+	
+    if ((m == 4 || m == 6 || m == 9 || m == 11) && (d > 30)){
         return true;
-    return false;
+	}
+	return false ;
 }
 
 double BitcoinExchange::getDateVal(std::string date)
 {
 	std::map<std::string, double>::iterator it =  _db.lower_bound(date);
-	if (it == _db.end())
-		_db[date] = 0;
-	_db[it->first] = it->second;
-	if (it != _db.begin() && it->first != date)
+	if (it == _db.end()){
+		it--;
+		_db[it->first] = it->second;
+	}
+	else if (it != _db.begin() && it->first != date)
 		--it;
 	double val = ((*it).second);
 	return val;

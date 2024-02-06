@@ -11,21 +11,23 @@
 #include <exception>
 #include <limits>
 #include <cctype>
+#include <cstdlib>
 
-std::list<std::string> split(std::string str, char sep);
+std::map<size_t, std::string> split(std::string str, char sep);
 
 class BitcoinExchange
 {
 	private:
 
 		std::map<std::string, double> _db;
+		std::map<size_t, std::string> _dateList;
 
 		void storeDB(std::string fileName,
 			std::map<std::string, double>& db,
 			char dateSep);
 		
         bool isLeapYear(int year);
-		bool isBadDate(std::list<std::string> dateList);
+		bool isBadDate(std::string date);
 		double getDateVal(std::string date);
 		
 	

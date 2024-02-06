@@ -2,12 +2,13 @@
 #define RPN_HPP
 #include <iostream>
 #include <stack>
+#include <list>
 #include <sstream>
 #include <exception>
 
 class RPN{
     private:
-        std::stack<int> _nums;
+        std::stack<double, std::list<double> > _nums;
         bool    validateInput(std::string input);
         bool    isOperator(std::string input);
         void    doOperations(std::string input);
@@ -16,9 +17,7 @@ class RPN{
         RPN(const RPN&);
         RPN &operator=(const RPN&);
         ~RPN();
-        int calculate(std::string input);
-
-
+        double calculate(std::string input);
 
 };
 

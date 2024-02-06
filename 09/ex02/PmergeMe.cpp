@@ -20,8 +20,8 @@ PmergeMe::PmergeMe(const PmergeMe& og){
     *this = og;
 }
 
-PmergeMe::PmergeMe(char **av) :  _last(-1) {
-    //1 stores number in container
+//1 stores number in container
+PmergeMe::PmergeMe(char **av) :  _last(-1), sorted(false) {
     for (int i = 1; av[i]; i++){
         if ((std::string(av[i]).length() > 10 )
             || std::string(av[i]).find_first_not_of("0123456789+") != std::string::npos){
@@ -38,6 +38,17 @@ PmergeMe::PmergeMe(char **av) :  _last(-1) {
             _dqNum.push_back(num);
         }
     }
+    checkSort();
+}
+
+void    PmergeMe::checkSort(){
+    for (size_t i = 0; i < _vecNum.size() - 1; i++){
+        if (_vecNum[i] > _vecNum[i + 1]){
+            sorted = false;
+            return ;
+        }
+    }
+    sorted = true;
 }
 
 //2 make a pair of each two consecutive numbers 
@@ -47,8 +58,8 @@ std::vector<std::pair<int, int> > PmergeMe::createPairVec(){
         _last = _vecNum[_vecNum.size() - 1];
         _vecNum.pop_back();
     }
-    for (std::vector<int>::iterator it = _vecNum.begin(); it != _vecNum.end(); ++it) {
-        pair.push_back(std::make_pair(*it, *(it++)));
+    for (size_t i = 0; i < _vecNum.size(); i += 2) {
+        pair.push_back(std::make_pair(_vecNum[i], _vecNum[i + 1]));
     }
     return pair;
 }
@@ -118,8 +129,8 @@ std::deque<std::pair<int, int> > PmergeMe::createPairDq(){
         _last = _dqNum[_dqNum.size() - 1];
         _dqNum.pop_back();
     }
-    for (std::deque<int>::iterator it = _dqNum.begin(); it != _dqNum.end(); ++it) {
-        pair.push_back(std::make_pair(*it, *(it++)));
+    for (size_t i = 0; i < _dqNum.size(); i += 2) {
+        pair.push_back(std::make_pair(_dqNum[i], _dqNum[i + 1]));
     }
     return pair;
 }

@@ -11,9 +11,7 @@ RPN::RPN(const RPN &og) {
     *this = og;
 }
 
-RPN::~RPN(){
-    std::cout << "RPN destructor called" << std::endl;
-}
+RPN::~RPN(){}
 
 bool    RPN::validateInput(std::string input){
     if (input.find_first_not_of("0123456789*+-/ ") == std::string::npos)
@@ -29,7 +27,7 @@ bool    RPN::isOperator(std::string input){
 
 void    RPN::doOperations(std::string input){
 
-    int a, b;
+    double a, b;
     b = _nums.top();
     _nums.pop();
     a = _nums.top();
@@ -49,7 +47,7 @@ void    RPN::doOperations(std::string input){
     }
 }
 
-int RPN::calculate(std::string input){
+double RPN::calculate(std::string input){
     if (!validateInput(input))
         throw std::invalid_argument("Invalid input");
     std::stringstream ss;
@@ -60,7 +58,7 @@ int RPN::calculate(std::string input){
             _nums.push(token[0] - 48);
         } else if (isOperator(token)){
             if (_nums.size() < 2) {
-                throw std::runtime_error("Not enough operands for operation");
+                throw std::runtime_error("Not enough numbers");
             }
             doOperations(token);
         }
